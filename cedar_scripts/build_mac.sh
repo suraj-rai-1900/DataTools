@@ -138,9 +138,11 @@ if [ -z "${nuance}" ]; then
   EKth[gamma]="$(python -c "print(2*(${m_e}+${EKth[e-]}))")"
   EKth[pi-]=72.1
   EKth[pi+]=72.1
-  EKth[pi0]="$(python -c "print(2*${EKth[gamma]})")"
-  EkinMax="$(python -c "print(${Emax}+${EKth[${pid}]:-0})")"
-  [ ! -z "${Emin}" ] && EkinMin="$(python -c "print(${Emin}+${EKth[${pid}]:-0})")"
+  # for pi0, account for rest mass in decay to gammas
+  Pi0RestMass=134.98
+  EKth[pi0]="$(python -c "print(2*${EKth[gamma]}-${Pi0RestMass})")"
+  EkinMax="$(python -c "print(max(0,${Emax}+${EKth[${pid}]:-0}))")"
+  [ ! -z "${Emin}" ] && EkinMin="$(python -c "print(max(0,${Emin}+${EKth[${pid}]:-0}))")"
   if [ "${pid}" == "gamma" ]; then
     generator="gamma-conversion"
   elif [ "${pid}" == "neutron" ]; then
