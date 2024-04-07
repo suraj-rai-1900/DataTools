@@ -13,7 +13,7 @@ mkdir /home/surajrai/scratch/outputs_npz
 for ((i=0; i<10; i++))
 do
     lb=$((1000*i + 1))  # Calculate the lower bound
-    hb=$((1000*(i+1)))  # Calculate the upper bound
+    hb=$((1000*(i+1)) + 1)  # Calculate the upper bound
     sbatch <<EOF
 #!/bin/bash
 #SBATCH --account=rpp-blairt2k
