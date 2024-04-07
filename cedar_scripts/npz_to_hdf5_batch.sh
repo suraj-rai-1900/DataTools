@@ -7,6 +7,7 @@ source /home/surajrai/scratch/DataTools/cedar_scripts/sourceme.sh
 source /home/surajrai/scratch/env/bin/activate
 pip install --no-index --upgrade pip
 pip install --no-index h5py
+mkdir /home/surajrai/scratch/outputs_h5/
 
 for ((i=0; i<10; i++))
 do
@@ -20,4 +21,4 @@ out_fpath="/home/surajrai/scratch/outputs_h5/iwcd_p320ka_w750m_1e17pot_2p39_wcsi
 
 python /home/surajrai/scratch/DataTools/root_utils/np_to_digihit_array_hdf5.py $input_file -o $out_fpath
 
-#done
+done
