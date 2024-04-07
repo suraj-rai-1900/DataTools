@@ -23,7 +23,7 @@ do
 #SBATCH --time=1-10:00:00 
 #SBATCH --mem=200GB
 
-python root_utils/npz_batch_prod.py -s "$lb" -p "$hb" -o /home/surajrai/scratch/outputs_npz/
+python root_utils/npz_prod.py -s "$lb" -p "$hb" -o /home/surajrai/scratch/outputs_npz/
 EOF
 done
 
