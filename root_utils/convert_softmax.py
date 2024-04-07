@@ -17,7 +17,7 @@ if __name__=="__main__":
     config = get_args()   
     dir_inpath = config.in_path[0]
     print(dir_inpath)
-    dir_outpath = dir_inpath[:-1] + '_root/'
+    dir_outpath = config.out_path + '_root/'
     files = sorted([f for f in os.listdir(dir_inpath) if os.path.isfile(os.path.join(dir_inpath, f))])
     out_fnames = []
     for f in files:
