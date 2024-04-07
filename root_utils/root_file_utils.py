@@ -5,6 +5,39 @@ import numpy as np
 ROOT.gSystem.Load(os.environ['WCSIMDIR'] + "/libWCSimRoot.so")
 
 
+def convert(numpyfile, rootfile):
+    #Convert a npy file with 4 entries into a root file with the TTree data structure
+    softmax = np.load(numpyfile)
+    print(len(softmax))
+    g_array = softmax[:, 0]
+    e_array = softmax[:, 1]
+    mu_array = softmax[:, 2]
+    pi0_array = softmax[:, 3]
+
+    output_file = ROOT.TFile.Open(rootfile, "recreate")
+    tree = ROOT.TTree("softmax_output", "Softmax Output")
+
+    prob_gamma = np.zeros(1, dtype=np.float32)
+    prob_e = np.zeros(1, dtype=np.float32)
+    prob_mu = np.zeros(1, dtype=np.float32)
+    prob_pi0 = np.zeros(1, dtype=np.float32)
+
+    tree.Branch("prob_gamma", prob_gamma, "prob_gamma/F")
+    tree.Branch("prob_e", prob_e, "prob_e/F")
+    tree.Branch("prob_mu", prob_mu, "prob_mu/F")
+    tree.Branch("prob_pi0", prob_pi0, "prob_pi0/F")
+
+    for i in range(len(g_array)):
+        prob_gamma[0] = g_array[i]
+        prob_e[0] = e_array[i]
+        prob_mu[0] = mu_array[i]
+        prob_pi0[0] = pi0_array[i]
+        tree.Fill()
+
+    output_file.Write()
+    output_file.Close()
+
+
 class WCSim:
     def __init__(self, tree):
         print("number of entries in the geometry tree: " + str(self.geotree.GetEntries()))
