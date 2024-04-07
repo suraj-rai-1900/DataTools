@@ -14,7 +14,7 @@ cd ..
 
 for ((i=0; i<10; i++))
 do
-    lb=$((1000*i))  # Calculate the lower bound
+    lb=$((1000*i + 1))  # Calculate the lower bound
     hb=$((1000*(i+1)))  # Calculate the upper bound
     sbatch <<EOF
 #!/bin/bash
