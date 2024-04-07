@@ -7,10 +7,8 @@
 module load StdEnv/2016
 module load python/3.6.3
 
-cd /home/surajrai/scratch/DataTools/cedar_scripts/ #script directory for sourceme.sh and process_raw_all_npz.sh
-
-source sourceme.sh
-cd ..
+source /home/surajrai/scratch/DataTools/cedar_scripts/sourceme.sh
+mkdir /home/surajrai/scratch/outputs_npz
 
 for ((i=0; i<10; i++))
 do
